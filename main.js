@@ -140,31 +140,38 @@ document.addEventListener('DOMContentLoaded', () => {
             delay: 0.5
         });
 
-        // Staggered Cards Reveal (Improved for Mobile)
+        // Staggered Cards Reveal — using set + to pattern for reliability
         const staggeredGrids = ['.practice-grid', '.highlights-grid', '.news-grid', '.faq-list', '.about-content-grid'];
         staggeredGrids.forEach(selector => {
             const grid = document.querySelector(selector);
             if (grid) {
-                gsap.from(grid.children, {
-                    scrollTrigger: {
-                        trigger: grid,
-                        start: "top 90%", // Trigger earlier on mobile
-                        once: true // Ensure they don't hide again
-                    },
-                    y: 30,
-                    opacity: 0,
-                    duration: 0.8,
-                    stagger: 0.1,
-                    ease: "power2.out"
+                const children = Array.from(grid.children);
+                // Set initial hidden state
+                gsap.set(children, { opacity: 0, y: 30 });
+
+                ScrollTrigger.create({
+                    trigger: grid,
+                    start: "top 95%",
+                    once: true,
+                    onEnter: () => {
+                        gsap.to(children, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            stagger: 0.12,
+                            ease: "power2.out",
+                            clearProps: "transform,opacity" // remove inline styles after animation
+                        });
+                    }
                 });
             }
         });
         
-        // Refresh ScrollTrigger after a short delay to ensure layout is final
+        // Refresh ScrollTrigger after layout settles
         window.addEventListener('load', () => {
             setTimeout(() => {
                 ScrollTrigger.refresh();
-            }, 500);
+            }, 300);
         });
     }
 
