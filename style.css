@@ -263,8 +263,8 @@ body {
     align-items: center;
     background-color: var(--dark-bg);
     overflow: hidden;
-    padding-top: calc(85px + 50px); /* Account for sticky header height */
 }
+
 
 .hero-background {
     position: absolute;
@@ -278,10 +278,11 @@ body {
 .hero-background img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Prevent cutting off his hand */
-    object-position: right bottom; /* Align him to the right bottom */
+    object-fit: cover;
+    object-position: center top;
     opacity: 1;
 }
+
 
 /* Adjust overlay to compensate for contain */
 .hero::before {
@@ -299,11 +300,13 @@ body {
     display: flex;
     position: relative;
     z-index: 3;
-    justify-content: flex-start;
+    justify-content: flex-end; /* Align content to right */
     align-items: center;
     height: 100%;
     width: 100%;
+    padding-top: 135px; /* Account for fixed header */
 }
+
 
 .hero-content {
     max-width: 600px;
@@ -1001,14 +1004,20 @@ body {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1.5fr;
-    gap: 80px;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 50px; /* Reduced gap to fit 4 columns */
     margin-bottom: 80px;
     position: relative;
     z-index: 2;
 }
 
+
+.footer-accordion-trigger {
+    display: none; /* Hide globally by default (Desktop) */
+}
+
 .footer-logo {
+
     height: 60px; /* Increased from 40px */
     margin-bottom: 40px;
 }
@@ -2378,12 +2387,8 @@ body {
         align-items: flex-start;
     }
     .footer-accordion-trigger {
-        width: 100%;
-        padding: 20px 0;
-        background: none;
-        border: none;
-        color: #fff;
         display: flex;
+
         justify-content: space-between;
         align-items: center;
         font-size: 1.1rem;
@@ -2732,3 +2737,83 @@ body {
 }
 
 
+/* Page Heroes (About, Practice, Team, etc.) */
+.page-header, .about-hero, .services-hero {
+    height: 60vh;
+    min-height: 400px;
+    position: relative;
+    background-color: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.page-header .container, .about-hero .container, .services-hero .container {
+    display: flex;
+    justify-content: flex-end; /* Align content to right */
+
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding-top: 135px; /* Header offset */
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: #fff;
+    margin: 0;
+    max-width: 600px;
+    text-align: right;
+}
+
+
+.about-hero-bg, .services-hero-bg, .faq-hero-bg, .team-hero-bg, .about-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.about-hero-bg img, .services-hero-bg img, .faq-hero-bg img, .team-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.page-header::before, .about-hero::before, .services-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(26, 30, 38, 0.9) 20%, rgba(26, 30, 38, 0.4) 100%);
+    z-index: 2;
+}
+
+/* Practice Areas Heading Specific */
+.practice-hero h1, .services-hero h1 {
+    font-size: 60px !important;
+}
+
+/* FAQ Spacing */
+.faq-item {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.faq-trigger {
+    padding: 20px 0;
+}
+
+/* Team Section Background */
+.team-hero {
+    background-image: url('/background-image%20-%20mobile.png') !important;
+    background-size: cover;
+    background-position: center;
+}
