@@ -459,8 +459,9 @@ body {
 }
 
 .about-page-main {
-    padding-top: calc(85px + 50px + 80px);
+    padding-top: 0;
 }
+
 
 /* Page content shared styles */
 .about-row {
@@ -1150,8 +1151,9 @@ body {
 
 /* Contact Page Styles */
 .contact-page-main {
-    padding-top: calc(85px + 50px + 100px);
+    padding-top: 135px; /* Fixed header offset only */
 }
+
 
 .contact-form-section {
     padding-bottom: 120px;
@@ -1261,8 +1263,9 @@ body {
 
 /* Practice Areas / Services Page */
 .services-page {
-    padding-top: calc(var(--nav-height) + 40px);
+    padding-top: 0;
 }
+
 
 .intro-section {
     padding: 80px 0;
@@ -2738,38 +2741,56 @@ body {
 }
 
 
-/* Page Heroes (About, Practice, Team, etc.) */
-.page-header, .about-hero, .services-hero {
-    height: 60vh;
-    min-height: 400px;
+.page-header, .about-hero, .services-hero, .stories-hero, .resources-hero, .faq-hero {
     position: relative;
     background-color: var(--dark-bg);
     display: flex;
     align-items: center;
     overflow: hidden;
+    margin-top: 0 !important;
 }
 
-.page-header .container, .about-hero .container, .services-hero .container {
-    display: flex;
-    justify-content: flex-end; /* Align content to right */
+/* Individual Hero Heights */
+.about-hero { height: 85vh; min-height: 700px; }
+.services-hero { height: 75vh; min-height: 600px; }
+.stories-hero { height: 70vh; min-height: 500px; }
+.resources-hero, .faq-hero { height: 60vh; min-height: 400px; }
 
+.page-header .container, .about-hero .container, .services-hero .container, .stories-hero .container, .resources-hero .container, .faq-hero .container {
+    display: flex;
+    justify-content: flex-end;
     position: relative;
     z-index: 3;
     width: 100%;
-    padding-top: 135px; /* Header offset */
+    padding-top: 135px; /* Universal header offset */
 }
+
+
 
 .page-title {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: clamp(3rem, 8vw, 4.5rem); /* Responsive large heading */
     color: #fff;
     margin: 0;
-    max-width: 600px;
+    max-width: 800px; /* Wider for better text flow */
     text-align: right;
+    line-height: 1.1;
+}
+
+.page-subtitle, .intro-text, .mobile-intro {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 650px;
+    margin-top: 25px;
+    text-align: right;
+    line-height: 1.6;
+    font-weight: 300;
 }
 
 
-.about-hero-bg, .services-hero-bg, .faq-hero-bg, .team-hero-bg, .about-hero-bg {
+
+
+.about-hero-bg, .services-hero-bg, .faq-hero-bg, .team-hero-bg, .stories-hero-bg, .resources-hero-bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -2778,14 +2799,15 @@ body {
     z-index: 1;
 }
 
-.about-hero-bg img, .services-hero-bg img, .faq-hero-bg img, .team-hero-bg img {
+.about-hero-bg img, .services-hero-bg img, .faq-hero-bg img, .team-hero-bg img, .stories-hero-bg img, .resources-hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.page-header::before, .about-hero::before, .services-hero::before {
+
+.page-header::before, .about-hero::before, .services-hero::before, .stories-hero::before, .resources-hero::before, .faq-hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -2796,10 +2818,20 @@ body {
     z-index: 2;
 }
 
+
 /* Practice Areas Heading Specific */
 .practice-hero h1, .services-hero h1 {
-    font-size: 60px !important;
+    font-size: clamp(2.5rem, 6vw, 3.8rem) !important; /* Slightly smaller for long titles */
+    max-width: 900px;
 }
+
+/* Hero Content for sub-pages */
+.about-hero-content, .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 
 /* FAQ Spacing */
 .faq-item {
