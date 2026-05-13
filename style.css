@@ -300,12 +300,13 @@ body {
     display: flex;
     position: relative;
     z-index: 3;
-    justify-content: flex-end; /* Align content to right */
+    justify-content: flex-start; /* Restore left alignment for homepage */
     align-items: center;
     height: 100%;
     width: 100%;
     padding-top: 135px; /* Account for fixed header */
 }
+
 
 
 .hero-content {

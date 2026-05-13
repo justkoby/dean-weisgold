@@ -161,14 +161,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Refresh ScrollTrigger after a short delay to ensure layout is final
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 500);
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 500);
+        });
+    }
+
+    // Update Copyright Year
+    const copyrightYear = document.querySelector('.footer-bottom p');
+    if (copyrightYear) {
+        copyrightYear.innerHTML = copyrightYear.innerHTML.replace('2024', '2026');
     }
 
 
     console.log('Dean Weisgold Law Firm site initialized.');
 });
+
 
 
 
