@@ -50,5 +50,134 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // FAQ Accordion
+    const faqTriggers = document.querySelectorAll('.faq-trigger');
+    faqTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const item = trigger.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+
+    // Sticky Mobile Bar Logic
+    const stickyBar = document.querySelector('.sticky-mobile-bar');
+    if (stickyBar) {
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                if (window.scrollY > 300) {
+                    stickyBar.classList.add('visible');
+                } else {
+                    stickyBar.classList.remove('visible');
+                }
+            }
+        });
+    }
+
+    // Footer Accordions for Mobile
+    const footerTriggers = document.querySelectorAll('.footer-accordion-trigger');
+    footerTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const parent = trigger.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
+
+    // Smart Intake Form Logic
+    const intakeForm = document.querySelector('.intake-form');
+    if (intakeForm) {
+        const steps = Array.from(document.querySelectorAll('.intake-step'));
+        const nextBtns = document.querySelectorAll('.next-step');
+        const prevBtns = document.querySelectorAll('.prev-step');
+        const dots = document.querySelectorAll('.step-dot');
+        const progressBarFill = document.querySelector('.progress-bar-fill');
+        let currentStep = 0;
+
+        const updateForm = () => {
+            steps.forEach((step, idx) => {
+                step.classList.toggle('active', idx === currentStep);
+            });
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentStep);
+                dot.classList.toggle('completed', idx < currentStep);
+            });
+            const progress = (currentStep / (steps.length - 1)) * 100;
+            progressBarFill.style.width = `${progress}%`;
+            window.scrollTo({ top: intakeForm.offsetTop - 100, behavior: 'smooth' });
+        };
+
+        nextBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    updateForm();
+                }
+            });
+        });
+
+        prevBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentStep > 0) {
+                    currentStep--;
+                    updateForm();
+                }
+            });
+        });
+    }
+
+    // GSAP Animations
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Reveal
+        gsap.from('.hero-content > *', {
+            y: 30,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        // Section Reveal Logic
+        const revealSections = document.querySelectorAll('section:not(.hero)');
+        revealSections.forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+        // Staggered Cards
+        const staggeredGrids = ['.practice-grid', '.highlights-grid', '.news-grid', '.faq-list'];
+        staggeredGrids.forEach(selector => {
+            const grid = document.querySelector(selector);
+            if (grid) {
+                gsap.from(grid.children, {
+                    scrollTrigger: {
+                        trigger: grid,
+                        start: "top 85%"
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
+                });
+            }
+        });
+    }
+
     console.log('Dean Weisgold Law Firm site initialized.');
 });
+
+
+
