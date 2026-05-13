@@ -140,41 +140,32 @@ document.addEventListener('DOMContentLoaded', () => {
             delay: 0.5
         });
 
-        // Section Reveal Logic
-        const revealSections = document.querySelectorAll('section:not(.hero)');
-        revealSections.forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 80%",
-                    toggleActions: "play none none none"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power2.out"
-            });
-        });
-
-        // Staggered Cards
-        const staggeredGrids = ['.practice-grid', '.highlights-grid', '.news-grid', '.faq-list'];
+        // Staggered Cards Reveal (Improved for Mobile)
+        const staggeredGrids = ['.practice-grid', '.highlights-grid', '.news-grid', '.faq-list', '.about-content-grid'];
         staggeredGrids.forEach(selector => {
             const grid = document.querySelector(selector);
             if (grid) {
                 gsap.from(grid.children, {
                     scrollTrigger: {
                         trigger: grid,
-                        start: "top 85%"
+                        start: "top 90%", // Trigger earlier on mobile
+                        once: true // Ensure they don't hide again
                     },
                     y: 30,
                     opacity: 0,
                     duration: 0.8,
-                    stagger: 0.15,
+                    stagger: 0.1,
                     ease: "power2.out"
                 });
             }
         });
+        
+        // Refresh ScrollTrigger after a short delay to ensure layout is final
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
     }
+
 
     console.log('Dean Weisgold Law Firm site initialized.');
 });

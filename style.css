@@ -2057,10 +2057,12 @@ body {
 
     /* Hero - Background only on mobile */
     .hero {
-        height: 60vh;
-        min-height: auto;
+        height: 100vh;
+        min-height: 100vh;
         padding: 0;
         background-color: var(--dark-bg);
+        position: relative;
+        overflow: hidden;
     }
     .hero .container {
         display: none !important;
@@ -2073,12 +2075,13 @@ body {
         height: 100%;
     }
     .hero-background img {
-        content: url('/background-image - mobile.png');
+        content: url('/background-image%20-%20mobile.png');
         object-fit: cover;
         object-position: center;
         width: 100%;
         height: 100%;
     }
+
 
     /* About Section */
     .about-content-grid {
