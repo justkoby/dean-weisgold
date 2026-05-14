@@ -41,6 +41,7 @@ ul {
 body {
     font-family: var(--font-body);
     color: var(--text-dark);
+    font-size: 14px;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -330,7 +331,7 @@ body {
 }
 
 .hero-content p {
-    font-size: 1.25rem;
+    font-size: 14px;
     color: var(--text-gray);
     margin-bottom: 40px;
     line-height: 1.6;
@@ -398,7 +399,7 @@ body {
 }
 
 .about-text-column p {
-    font-size: 1.15rem;
+    font-size: 14px;
     color: #444;
     margin-bottom: 30px;
     line-height: 1.7;
@@ -458,11 +459,11 @@ body {
 
 .about-hero-content h1 {
     font-family: var(--font-heading);
-    font-size: 9rem;
+    font-size: 60px;
     color: #fff;
     margin: 0;
     font-weight: 400;
-    line-height: 0.9;
+    line-height: 1.1;
 }
 
 .about-page-main {
@@ -519,7 +520,7 @@ body {
 }
 
 .about-body p {
-    font-size: 1.15rem;
+    font-size: 14px;
     color: #444;
     margin-bottom: 25px;
     line-height: 1.7;
@@ -1298,7 +1299,7 @@ body {
 }
 
 .intro-text p {
-    font-size: 1.2rem;
+    font-size: 14px;
     color: #444;
     margin-bottom: 20px;
     line-height: 1.7;
@@ -1468,7 +1469,7 @@ body {
 }
 
 .cta-box p {
-    font-size: 1.2rem;
+    font-size: 14px;
     margin-bottom: 40px;
     color: var(--text-gray);
 }
@@ -2810,9 +2811,10 @@ body {
 }
 
 /* Individual Hero Heights */
-.about-hero { height: 85vh; min-height: 700px; }
-.services-hero { height: 75vh; min-height: 600px; }
-.stories-hero { height: 70vh; min-height: 500px; }
+.about-hero { height: 350px !important; min-height: 350px !important; }
+.team-hero { height: 350px !important; min-height: 350px !important; }
+.services-hero { height: 350px !important; min-height: 350px !important; }
+.stories-hero { height: 350px !important; min-height: 350px !important; }
 .resources-hero, .faq-hero { height: 60vh; min-height: 400px; }
 
 .page-header .container, .about-hero .container, .services-hero .container, .stories-hero .container, .resources-hero .container, .faq-hero .container {
@@ -2822,6 +2824,10 @@ body {
     z-index: 3;
     width: 100%;
     padding-top: 135px; /* Universal header offset */
+}
+
+.about-hero .container, .team-hero .container, .services-hero .container, .stories-hero .container {
+    justify-content: flex-start !important;
 }
 
 
@@ -2836,14 +2842,23 @@ body {
     line-height: 1.1;
 }
 
+.about-hero .page-title, .team-hero .page-title, .about-hero h1, .team-hero h1 {
+    text-align: left;
+    font-size: 60px !important;
+}
+
 .page-subtitle, .intro-text, .mobile-intro {
-    font-size: 1.25rem;
+    font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
     max-width: 650px;
     margin-top: 25px;
     text-align: right;
     line-height: 1.6;
     font-weight: 300;
+}
+
+.about-hero .mobile-intro, .team-hero .mobile-intro, .team-hero .page-subtitle {
+    text-align: left;
 }
 
 
@@ -2888,7 +2903,9 @@ body {
 .about-hero-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 
@@ -2904,7 +2921,7 @@ body {
 }
 
 /* Team Section Background */
-.team-hero {
+.team-hero, .about-hero {
     background-image: url('/background-image%20-%20mobile.png') !important;
     background-size: cover;
     background-position: center;
